@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ModalService } from './modal/modal.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'apartment_pin_manager';
+  private modalService = inject(ModalService);
+
+  public isModalOpen!: boolean;
+
+  ngOnInit() {
+    this.modalService.getModelStatus().subscribe((data) => {
+      this.isModalOpen = data;
+    });
+  }
 }
