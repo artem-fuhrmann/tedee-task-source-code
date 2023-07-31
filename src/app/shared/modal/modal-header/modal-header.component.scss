@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h2 {
+  color: #263b65;
+  font-family: Lato;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+
+.close-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
