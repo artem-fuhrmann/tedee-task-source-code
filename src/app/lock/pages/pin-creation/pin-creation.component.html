@@ -1,0 +1,14 @@
+<app-modal>
+  <app-modal-header (closeButtonClick)="onCloseButtonClick()"
+    >New PIN</app-modal-header
+  >
+  <app-pin-form
+    (valueChange)="onValueChange($event)"
+    (formValidity)="onFormValidityChange($event)"
+  ></app-pin-form>
+  <app-modal-footer
+    ><button class="btn-basic create-btn" (click)="onCreateButtonClick()">
+      Create
+    </button></app-modal-footer
+  >
+</app-modal>
