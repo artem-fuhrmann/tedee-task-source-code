@@ -1,11 +1,10 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appNumericOnly]'
+  selector: '[appNumericOnly]',
 })
 export class NumericOnlyDirective {
-
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   @HostListener('input', ['$event']) onInput(event: Event) {
     const inputElement = this.el.nativeElement as HTMLInputElement;
@@ -21,5 +20,4 @@ export class NumericOnlyDirective {
     const sanitizedValue = value.replace(/[^0-9]/g, '');
     return sanitizedValue;
   }
-
 }

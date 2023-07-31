@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PinService } from '@shared/services/pin.service';
 import { Pin } from '@shared/interfaces/pin.interface';
@@ -8,6 +8,7 @@ import { OPENED_LOCK_ID } from '../../tokens/opened-lock-id.token';
   selector: 'app-pin-creation',
   templateUrl: './pin-creation.component.html',
   styleUrls: ['./pin-creation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PinCreationComponent {
   private router = inject(Router);
@@ -18,11 +19,11 @@ export class PinCreationComponent {
   public formValue!: Pin;
   private _isFormValid!: boolean;
 
-  onValueChange(formData: Pin) {
+  public onValueChange(formData: Pin): void {
     this.formValue = formData;
   }
 
-  onCreateButtonClick() {
+  public onCreateButtonClick(): void {
     if (this._isFormValid) {
       this.pinService.create(+this.openedLockId, this.formValue).subscribe();
       this._navigateUp();
@@ -30,15 +31,15 @@ export class PinCreationComponent {
     }
   }
 
-  onCloseButtonClick() {
+  public onCloseButtonClick(): void {
     this._navigateUp();
   }
 
-  onFormValidityChange(isValid: boolean) {
+  public onFormValidityChange(isValid: boolean): void {
     this._isFormValid = isValid;
   }
 
-  private _navigateUp() {
+  private _navigateUp(): void {
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 }

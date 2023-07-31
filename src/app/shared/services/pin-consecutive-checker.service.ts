@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class PinConsecutiveCheckerService {
   constructor() {}
 
-  check(pin: string) {
+  public check(pin: string): boolean {
     if (pin.length <= 1) {
       return false;
     }
@@ -20,7 +20,7 @@ export class PinConsecutiveCheckerService {
     return false;
   }
 
-  private _isConsecutive(prev: number, current: number) {
+  private _isConsecutive(prev: number, current: number): boolean {
     return Math.abs(prev - current) === 1;
   }
 }

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -6,15 +7,9 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation,
   inject,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PinForm } from '../../interfaces/pin-form.interface';
 import { Subject, map, startWith, takeUntil } from 'rxjs';
 import { PinGeneratorService } from '@shared/services/pin-generator.service';
@@ -27,7 +22,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
   selector: 'app-pin-form',
   templateUrl: './pin-form.component.html',
   styleUrls: ['./pin-form.component.scss'],
-  // encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PinFormComponent implements OnInit, OnDestroy {
   private formBuilder = inject(FormBuilder);
@@ -39,40 +34,34 @@ export class PinFormComponent implements OnInit, OnDestroy {
 
   public pinForm!: FormGroup<PinForm>;
 
+  private _undestroy$: Subject<boolean> = new Subject();
+
   @Output() valueChange = new EventEmitter<Pin>();
   @Output() formValidity = new EventEmitter<boolean>();
 
-  private undestroy$: Subject<boolean> = new Subject();
-    @ViewChild('startPicker') startPicker!: MatDatepicker<Date>;
-    @ViewChild('endPicker') endPicker!: MatDatepicker<Date>;
+  @ViewChild('startPicker') startPicker!: MatDatepicker<Date>;
+  @ViewChild('endPicker') endPicker!: MatDatepicker<Date>;
 
-
-  ngOnInit() {
+  ngOnInit(): void {
     this._initPinForm();
     this._initFormValueObserver();
     this._initFormValidityObserver();
   }
 
-  ngAfterViewInit() {
-    // console.log(this.picker)
-
+  ngOnDestroy(): void {
+    this._undestroy$.next(true);
+    this._undestroy$.complete();
   }
 
-  ngOnDestroy() {
-    this.undestroy$.next(true);
-    this.undestroy$.complete();
-  }
-
-
-  openStartDatepicker() {
+  public openStartDatepicker(): void {
     this.startPicker.open();
   }
-  
-  openEndDatepicker() {
+
+  public openEndDatepicker(): void {
     this.endPicker.open();
   }
 
-  private _initPinForm() {
+  private _initPinForm(): void {
     this.pinForm = this.formBuilder.group(
       {
         alias: this.formBuilder.control(
@@ -109,20 +98,20 @@ export class PinFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  private _initFormValueObserver() {
+  private _initFormValueObserver(): void {
     this.pinForm.valueChanges
-      .pipe(startWith(this.pinForm.value), takeUntil(this.undestroy$))
+      .pipe(startWith(this.pinForm.value), takeUntil(this._undestroy$))
       .subscribe((data) => {
         this.valueChange.emit(data as Pin);
       });
   }
 
-  private _initFormValidityObserver() {
+  private _initFormValidityObserver(): void {
     this.pinForm.statusChanges
       .pipe(
         startWith(this.pinForm.status),
         map((status) => status !== 'INVALID'),
-        takeUntil(this.undestroy$)
+        takeUntil(this._undestroy$)
       )
       .subscribe((status) => {
         this.formValidity.emit(status);

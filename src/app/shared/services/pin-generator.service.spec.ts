@@ -15,10 +15,10 @@ describe('PinGeneratorService', () => {
   });
 
   it('should length equals 6', () => {
-    expect(service.generate().length).toEqual(6)
-  })
+    expect(service.generate().length).toEqual(6);
+  });
 
   it('should consist digits only', () => {
-    expect(Number(service.generate())).not.toBeNaN()
-  })
+    expect(Number(service.generate())).not.toBeNaN();
+  });
 });

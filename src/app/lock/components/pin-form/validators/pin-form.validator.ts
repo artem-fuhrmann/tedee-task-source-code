@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
@@ -22,7 +22,7 @@ export class PinFormValidator implements Validator {
 
       if (
         startDateValue > endDateControl.value ||
-        endDateControl.value.valueOf() < new Date().setHours(0,0,0,0)
+        endDateControl.value.valueOf() < new Date().setHours(0, 0, 0, 0)
       ) {
         endDateControl.setErrors({ enddate: true });
       } else {

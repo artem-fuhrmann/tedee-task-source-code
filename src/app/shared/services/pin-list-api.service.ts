@@ -13,19 +13,19 @@ export class PinListApiService {
 
   constructor() {}
 
-  getPinList(id: number): Observable<BaseResponse<PinListResult>> {
+  public getPinList(id: number): Observable<BaseResponse<PinListResult>> {
     return this.mockHttpService.getPinList(id);
   }
 
-  getPin(lockId: number, pinId: number): Observable<BaseResponse<Pin>> {
+  public getPin(lockId: number, pinId: number): Observable<BaseResponse<Pin>> {
     return this.mockHttpService.getPin(lockId, pinId);
   }
 
-  createPin(lockId: number, pin: Pin) {
+  public createPin(lockId: number, pin: Pin): Observable<null> {
     return this.mockHttpService.post(lockId, pin);
   }
 
-  deletePin(lockId: number, pinId: number) {
+  public deletePin(lockId: number, pinId: number): Observable<null> {
     return this.mockHttpService.remove(lockId, pinId);
   }
 }

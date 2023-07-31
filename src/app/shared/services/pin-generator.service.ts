@@ -8,7 +8,7 @@ export class PinGeneratorService {
   private pinConsecutiveCheckerService = inject(PinConsecutiveCheckerService);
   private _length = 6;
 
-  generate() {
+  public generate(): string {
     let pin = '';
 
     while (pin.length < this._length) {

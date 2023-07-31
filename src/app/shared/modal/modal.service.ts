@@ -6,12 +6,13 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class ModalService {
   private _isModalOpen: boolean = false;
-
   private _modelStatus$: BehaviorSubject<boolean> = new BehaviorSubject(
     this._isModalOpen
   );
 
-  getModelStatus(): Observable<boolean> {
+  constructor() {}
+
+  public getModelStatus(): Observable<boolean> {
     return this._modelStatus$.asObservable();
   }
 
@@ -19,6 +20,4 @@ export class ModalService {
     this._isModalOpen = !this._isModalOpen;
     this._modelStatus$.next(this._isModalOpen);
   }
-
-  constructor() {}
 }

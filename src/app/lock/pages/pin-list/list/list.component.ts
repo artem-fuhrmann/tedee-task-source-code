@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Pin } from '../../../../shared/interfaces/pin.interface';
 import { Observable, switchMap } from 'rxjs';
 import { PinService } from '@shared/services/pin.service';
@@ -8,6 +8,7 @@ import { OPENED_LOCK_ID } from 'src/app/lock/tokens/opened-lock-id.token';
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
   private pinService = inject(PinService);
