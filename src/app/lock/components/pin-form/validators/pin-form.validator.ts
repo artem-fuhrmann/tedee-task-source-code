@@ -19,9 +19,10 @@ export class PinFormValidator implements Validator {
       if (!endDateControl?.value) {
         return null;
       }
+
       if (
         startDateValue > endDateControl.value ||
-        endDateControl.value < new Date()
+        endDateControl.value.valueOf() < new Date().setHours(0,0,0,0)
       ) {
         endDateControl.setErrors({ enddate: true });
       } else {

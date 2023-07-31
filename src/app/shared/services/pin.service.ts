@@ -21,7 +21,9 @@ export class PinService {
         const pins$ = data.map((pinId) => this.get(lockId, pinId));
         return pins$.length ? forkJoin(pins$) : of([]);
       }),
-      tap((data) => console.log(data)),
+      map((pinList) => {
+        return pinList.sort((a, b) => a.alias.localeCompare(b.alias))
+      }),
       tap((data) => this._pinList$.next(data))
     );
   }

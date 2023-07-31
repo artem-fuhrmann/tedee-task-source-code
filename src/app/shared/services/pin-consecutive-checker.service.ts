@@ -21,6 +21,6 @@ export class PinConsecutiveCheckerService {
   }
 
   private _isConsecutive(prev: number, current: number) {
-    return Math.abs(prev - current) === 0;
+    return Math.abs(prev - current) === 1;
   }
 }
