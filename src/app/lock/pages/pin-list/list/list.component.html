@@ -1,0 +1,19 @@
+<div class="pin-list">
+  <div class="pin-list__header">
+    <div class="pin-list__header__name">
+      <span>Name</span>
+    </div>
+    <div class="pin-list__header__from">
+      <span>From</span>
+    </div>
+    <div class="pin-list__header__to">
+      <span>To</span>
+    </div>
+  </div>
+
+  <app-pin
+    *ngFor="let pin of pins$ | async"
+    [data]="pin"
+    [routerLink]="['details', pin.id]"
+  ></app-pin>
+</div>
