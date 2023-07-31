@@ -80,7 +80,7 @@ export class PinFormComponent implements OnInit, OnDestroy {
             value: this.initialData?.alias ?? '',
             disabled: !!this.initialData,
           },
-          { validators: Validators.required }
+          { validators: [Validators.required, Validators.maxLength(20)] }
         ),
         pin: this.formBuilder.control(
           {

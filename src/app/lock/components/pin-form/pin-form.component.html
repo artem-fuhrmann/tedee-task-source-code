@@ -5,6 +5,9 @@
     <mat-error *ngIf="pinForm.controls.alias.hasError('required')">
       Name field is required
     </mat-error>
+    <mat-error *ngIf="pinForm.controls.alias.hasError('maxlength')">
+      Maximum name length is 20 symbols
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-input" [floatLabel]="'always'">
@@ -20,7 +23,7 @@
       "
     >
       PIN length should be 6 digits </mat-error
-    ><mat-error *ngIf="pinForm.controls.pin.hasError('pin')">
+    ><mat-error *ngIf="pinForm.controls.pin.hasError('pin') && !pinForm.controls.pin.hasError('minlength') && !pinForm.controls.pin.hasError('maxlength')" >
       PIN digits shoudn't be consecutive
     </mat-error>
   </mat-form-field>
@@ -43,8 +46,8 @@
       [for]="endPicker"
     ></mat-datepicker-toggle>
     <mat-datepicker #endPicker></mat-datepicker>
-    <mat-error *ngIf="pinForm.controls.endDate.hasError('enddate')">
-      End date should be greater the start date od current date
+    <mat-error *ngIf="pinForm.controls.endDate.hasError('enddate') ">
+      End date should be greater the start date or current date
     </mat-error>
   </mat-form-field>
 </form>
