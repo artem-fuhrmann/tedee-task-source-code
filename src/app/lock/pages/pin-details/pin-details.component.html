@@ -1,0 +1,15 @@
+<app-modal>
+  <app-modal-header (closeButtonClick)="onCloseButtonClick()"
+    >PIN details</app-modal-header
+  >
+  <app-pin-form
+    *ngIf="pinData$ | async as pinData"
+    (valueChange)="onValueChange($event)"
+    [initialData]="pinData"
+  ></app-pin-form>
+  <app-modal-footer
+    ><button class="danger-button create-btn" (click)="onDeleteButtonClick()">
+      Delete
+    </button></app-modal-footer
+  >
+</app-modal>
