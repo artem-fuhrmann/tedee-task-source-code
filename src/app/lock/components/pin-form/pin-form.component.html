@@ -1,0 +1,50 @@
+<form [formGroup]="pinForm">
+  <mat-form-field class="form-input" [floatLabel]="'always'">
+    <mat-label for="alias" class="label">Name:</mat-label>
+    <input matInput type="text" id="alias" formControlName="alias" />
+    <mat-error *ngIf="pinForm.controls.alias.hasError('required')">
+      Name field is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-input" [floatLabel]="'always'">
+    <mat-label for="pin">PIN:</mat-label>
+    <input matInput type="text" id="pin" formControlName="pin" />
+    <mat-error *ngIf="pinForm.controls.pin.hasError('required')">
+      PIN field is required
+    </mat-error>
+    <mat-error
+      *ngIf="
+        pinForm.controls.pin.hasError('minlength') ||
+        pinForm.controls.pin.hasError('maxlength')
+      "
+    >
+      PIN length should be 6 digits </mat-error
+    ><mat-error *ngIf="pinForm.controls.pin.hasError('pin')">
+      PIN digits shoudn't be consecutive
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-input" [floatLabel]="'always'">
+    <mat-label for="startDate">Start Date:</mat-label>
+    <input matInput [matDatepicker]="startPicker" formControlName="startDate" (focus)="openStartDatepicker()"/>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="startPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #startPicker ></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="form-input" [floatLabel]="'always'">
+    <mat-label for="endDate">End Date:</mat-label>
+    <input matInput [matDatepicker]="endPicker" formControlName="endDate" (focus)="openEndDatepicker()"/>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="endPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+    <mat-error *ngIf="pinForm.controls.endDate.hasError('enddate')">
+      End date should be greater the start date od current date
+    </mat-error>
+  </mat-form-field>
+</form>
