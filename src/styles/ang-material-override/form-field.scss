@@ -1,0 +1,41 @@
+.mdc-text-field {
+  background: rgba(34, 52, 90, 0.15)  !important;
+}
+
+.mdc-text-field--disabled {
+  background: rgba(34, 52, 90, 0.05) !important;
+
+  input {
+    opacity: 0.5 !important;
+  }
+}
+
+.mat-mdc-text-field-wrapper {
+  height: 45px !important; 
+  position: relative;
+  border-radius: 0px 4px 4px 0px !important;
+}
+
+.mat-mdc-text-field-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 11px;
+  height: 100%;
+  background-color: darkblue;
+  z-index: 9999;
+  padding: 0;
+} 
+
+.mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-form-field-infix {
+  padding: 0;
+}
+
+.mat-mdc-icon-button.mat-mdc-button-base {
+  display: none !important;
+}
+
+.mdc-line-ripple::before, .mdc-line-ripple::after {
+  border-bottom-style: none !important;
+}
