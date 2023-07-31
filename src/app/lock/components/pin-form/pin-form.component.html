@@ -12,7 +12,7 @@
 
   <mat-form-field class="form-input" [floatLabel]="'always'">
     <mat-label for="pin">PIN:</mat-label>
-    <input matInput type="text" id="pin" formControlName="pin" />
+    <input appNumericOnly matInput type="text" id="pin" formControlName="pin" />
     <mat-error *ngIf="pinForm.controls.pin.hasError('required')">
       PIN field is required
     </mat-error>
