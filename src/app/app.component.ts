@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ModalService } from './modal/modal.service';
+import { ModalService } from './shared/modal/modal.service';
 
 @Component({
   selector: 'app-root',
